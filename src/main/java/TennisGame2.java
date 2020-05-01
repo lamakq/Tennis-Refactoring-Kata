@@ -1,3 +1,6 @@
+/**
+ * For today's kata, let's focus on {@link TennisGame1}
+ */
 
 public class TennisGame2 implements TennisGame
 {
