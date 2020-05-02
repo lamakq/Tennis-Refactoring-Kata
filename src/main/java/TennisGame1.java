@@ -10,10 +10,20 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName.equals(this.player1.getName()))
-            this.player1.incrementScore();
-        else if (playerName.equals(this.player2.getName()))
-            this.player2.incrementScore();
+        getPlayer(playerName).incrementScore();
+    }
+
+    private Player getPlayer(String playerName) {
+        if (isPlayerNameMatched(player1, playerName)) {
+            return player1;
+        } else if (isPlayerNameMatched(player2, playerName)) {
+            return player2;
+        }
+        return null;
+    }
+
+    private boolean isPlayerNameMatched(Player player, String playerName) {
+        return player.getName().equals(playerName);
     }
 
     public String getScore() {
