@@ -4,11 +4,9 @@ public class TennisGame1 implements TennisGame {
     private int player1Score = 0;
     private int player2Score = 0;
     private String player1Name;
-    private String player2Name;
 
-    public TennisGame1(String player1Name, String player2Name) {
+    public TennisGame1(String player1Name) {
         this.player1Name = player1Name;
-        this.player2Name = player2Name;
     }
 
     public void wonPoint(String playerName) {
