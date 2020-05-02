@@ -88,17 +88,9 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String getScoreStringWhenTied(int score) {
-
-        switch (score) {
-            case 0:
-                return "Love-All";
-            case 1:
-                return "Fifteen-All";
-            case 2:
-                return "Thirty-All";
-            default:
-                return "Deuce";
+        if (score < 3) {
+            return mapScoreToString(score) + "-All";
         }
-
+        return "Deuce";
     }
 }
