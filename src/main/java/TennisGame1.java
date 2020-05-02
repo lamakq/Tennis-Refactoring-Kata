@@ -83,8 +83,12 @@ public class TennisGame1 implements TennisGame {
         } else if (isGameWon()) {
             return getScoreWhenGameIsWon();
         } else {
-            return String.format("%s-%s", getScoreFromInteger(player1Score),
-                getScoreFromInteger(player2Score));
+            return getFormattedScore();
         }
+    }
+
+    private String getFormattedScore() {
+        return String.format("%s-%s", getScoreFromInteger(player1Score),
+            getScoreFromInteger(player2Score));
     }
 }
