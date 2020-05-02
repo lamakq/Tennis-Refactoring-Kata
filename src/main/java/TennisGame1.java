@@ -37,11 +37,8 @@ public class TennisGame1 implements TennisGame {
             return getDisplayTextForWinOrAdvantage();
 
         }
-        String score = "";
-        score = getDisplayTextForPlayerScore(player1Score);
-        score += "-";
-        score += getDisplayTextForPlayerScore(player2Score);
-        return score;
+
+        return getDisplayTextForPlayerScore(player1Score) + "-" + getDisplayTextForPlayerScore(player2Score);
 
 
     }
