@@ -1,3 +1,5 @@
+import domain.Player;
+
 import static utills.AppConstant.ADVANTAGE;
 import static utills.AppConstant.ALL;
 import static utills.AppConstant.DEUCE;
@@ -9,19 +11,24 @@ import static utills.AppConstant.WIN;
 
 public class TennisGame1 implements TennisGame {
 
+    private static int DEFAULT_SCORE = 0;
     private int player1Score = 0;
     private int player2Score = 0;
 
-    private String player1Name;
-    private String player2Name;
+    //private String player1.getName();
+    //private String player2.getName();
+
+    private Player player1;
+    private Player player2;
 
     public TennisGame1(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+
+        player1 = new Player(player1Name, DEFAULT_SCORE);
+        player2 = new Player(player2Name, DEFAULT_SCORE);
     }
 
     public void wonPoint(String playerName) {
-        if (playerName.equals(player1Name))
+        if (playerName.equals(player1.getName()))
             player1Score += 1;
         else
             player2Score += 1;
@@ -72,15 +79,15 @@ public class TennisGame1 implements TennisGame {
 
     private String handleAdvantageOrWinningCase() {
         if (isAdvantagePlayer1()) {
-            return ADVANTAGE + player1Name;
+            return ADVANTAGE + player1.getName();
         }
         if (isAdvantagePlayer2()) {
-            return ADVANTAGE + player2Name;
+            return ADVANTAGE + player2.getName();
         }
         if (isWiningPlayer1()) {
-            return WIN + player1Name;
+            return WIN + player1.getName();
         }
-        return WIN + player2Name;
+        return WIN + player2.getName();
     }
 
     private boolean isWiningPlayer1() {
