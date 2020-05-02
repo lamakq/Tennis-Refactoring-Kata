@@ -8,7 +8,7 @@ import static utills.AppConstant.THIRTY;
 import static utills.AppConstant.WIN;
 
 public class TennisGame1 implements TennisGame {
-    
+
     private int player1Score = 0;
     private int player2Score = 0;
 
@@ -39,42 +39,35 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
-    private boolean areScoresEqual(){
+    private boolean areScoresEqual() {
         return player1Score == player2Score;
     }
 
     private boolean isAdvantageOrWinningCase() {
-        return player1Score >=4 || player2Score >=4;
+        return player1Score >= 4 || player2Score >= 4;
     }
 
     private String handleNormalCase(String score) {
-        int tempScore = 0;
-        StringBuilder scoreBuilder = new StringBuilder(score);
-        for (int i = 1; i < 3; i++) {
-            if (i == 1) {
-                tempScore = player1Score;
-            }
-            else {
-                scoreBuilder.append("-");
-                tempScore = player2Score;
-            }
-            switch (tempScore) {
-                case 0:
-                    scoreBuilder.append(LOVE);
-                    break;
-                case 1:
-                    scoreBuilder.append(FIFTEEN);
-                    break;
-                case 2:
-                    scoreBuilder.append(THIRTY);
-                    break;
-                case 3:
-                    scoreBuilder.append(FORTY);
-                    break;
-            }
-        }
-        score = scoreBuilder.toString();
+
+        score += getScoreDisplayName(player1Score);
+        score = score + "-";
+        score += getScoreDisplayName(player2Score);
         return score;
+    }
+
+    private String getScoreDisplayName(int tempScore) {
+        switch (tempScore) {
+            case 0:
+                return LOVE;
+            case 1:
+                return FIFTEEN;
+            case 2:
+                return THIRTY;
+            case 3:
+                return FORTY;
+            default:
+                return "";
+        }
     }
 
     private String handleAdvantageOrWinningCase() {
