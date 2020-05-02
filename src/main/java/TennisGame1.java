@@ -1,20 +1,17 @@
 
 public class TennisGame1 implements TennisGame {
 
-    public TennisGame1() {
-        Score.player1Score = 0;
-        Score.player2Score = 0;
-    }
+    Score score = new Score();
 
     public void wonPoint(String playerName) {
         if (player1(playerName))
-            Score.setPlayer1Score(Score.getPlayer1Score(Score.player1Score) + 1);
+            score.setPlayer1Score(score.getPlayer1Score() + 1);
         else
-            Score.setPlayer2Score(Score.getPlayer2Score() + 1);
+            score.setPlayer2Score(score.getPlayer2Score() + 1);
     }
 
     public String getScore() {
-        if (scoreIsEqual(Score.getPlayer1Score(Score.player1Score), Score.getPlayer2Score()))
+        if (score.scoresAreEqual())
         {
             return getDisplayTextForEqualScore();
         }
@@ -22,7 +19,7 @@ public class TennisGame1 implements TennisGame {
         {
             return getDisplayTextForWinOrAdvantage();
         }
-        return getDisplayTextForPlayerScore(Score.getPlayer1Score(Score.player1Score)) + "-" + getDisplayTextForPlayerScore(Score.getPlayer2Score());
+        return getDisplayTextForPlayerScore(score.getPlayer1Score()) + "-" + getDisplayTextForPlayerScore(score.getPlayer2Score());
     }
 
     private boolean player1(String playerName) {
@@ -53,45 +50,33 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean player1Won() {
-        return (Score.getPlayer1Score(Score.player1Score) - Score.getPlayer2Score())>=2;
+        return (score.getPlayer1Score() - score.getPlayer2Score())>=2;
     }
 
     private boolean advantageForPlayer1() {
-        return (Score.getPlayer1Score(Score.player1Score) - Score.getPlayer2Score()) == 1;
+        return (score.getPlayer1Score() - score.getPlayer2Score()) == 1;
 
     }
     private boolean advantageForPlayer2() {
-        return (Score.getPlayer2Score() - Score.getPlayer1Score(Score.player1Score)) == 1;
+        return (score.getPlayer2Score() - score.getPlayer1Score()) == 1;
 
     }
 
     private boolean eitherPlayerScoreIsGreaterThanEqualTo4() {
-        return Score.getPlayer1Score(Score.player1Score) >=4 || Score.getPlayer2Score() >=4;
+        return score.getPlayer1Score() >=4 || score.getPlayer2Score() >=4;
     }
 
     private String getDisplayTextForEqualScore() {
-        String score;
-        switch (Score.getPlayer1Score(Score.player1Score))
+        switch (score.getPlayer1Score())
         {
             case 0:
-                    score = "Love-All";
-                break;
+                 return "Love-All";
             case 1:
-                    score = "Fifteen-All";
-                break;
+                 return "Fifteen-All";
             case 2:
-                    score = "Thirty-All";
-                break;
+                 return "Thirty-All";
             default:
-                    score = "Deuce";
-                break;
-
+                 return "Deuce";
         }
-        return score;
     }
-
-    private boolean scoreIsEqual(int player1Score, int player2Score) {
-        return player1Score == player2Score;
-    }
-
 }
