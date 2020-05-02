@@ -1,3 +1,11 @@
+import static utills.AppConstant.ADVANTAGE;
+import static utills.AppConstant.ALL;
+import static utills.AppConstant.DEUCE;
+import static utills.AppConstant.FIFTEEN;
+import static utills.AppConstant.FORTY;
+import static utills.AppConstant.LOVE;
+import static utills.AppConstant.THIRTY;
+import static utills.AppConstant.WIN;
 
 public class TennisGame1 implements TennisGame {
     
@@ -19,10 +27,8 @@ public class TennisGame1 implements TennisGame {
             player2Score += 1;
     }
 
-
     public String getScore() {
         String score = "";
-
         if (areScoresEqual()) {
             score = handleScoreEqualCase();
         } else if (isAdvantageOrWinningCase()) {
@@ -50,16 +56,16 @@ public class TennisGame1 implements TennisGame {
             switch(tempScore)
             {
                 case 0:
-                    score+="Love";
+                    score+=LOVE;
                     break;
                 case 1:
-                    score+="Fifteen";
+                    score+=FIFTEEN;
                     break;
                 case 2:
-                    score+="Thirty";
+                    score+=THIRTY;
                     break;
                 case 3:
-                    score+="Forty";
+                    score+=FORTY;
                     break;
             }
         }
@@ -72,15 +78,15 @@ public class TennisGame1 implements TennisGame {
 
     private String getScoreTypeByDifference() {
         if (isAdvantagePlayer1()) {
-            return "Advantage player1";
+            return ADVANTAGE + player1Name;
         }
         if (isAdvantagePlayer2()) {
-            return "Advantage player2";
+            return ADVANTAGE + player2Name;
         }
         if (isWiningPlayer1()) {
-            return "Win for player1";
+            return WIN + player1Name;
         }
-        return "Win for player2";
+        return WIN + player2Name;
     }
 
     private boolean isWiningPlayer1() {
@@ -102,13 +108,13 @@ public class TennisGame1 implements TennisGame {
     private String handleScoreEqualCase() {
         switch (player1Score) {
             case 0:
-                return "Love-All";
+                return LOVE + "-" + ALL;
             case 1:
-                return "Fifteen-All";
+                return FIFTEEN + "-" + ALL;
             case 2:
-                return "Thirty-All";
+                return THIRTY + "-" + ALL;
             default:
-                return "Deuce";
+                return DEUCE;
         }
     }
 }
