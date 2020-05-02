@@ -32,16 +32,13 @@ public class TennisGame1 implements TennisGame {
         // scores are equal
         if (isScoreTied())
         {
-            score = getScoreStringWhenTied(this.player1.getScore());
+            return getScoreStringWhenTied(this.player1.getScore());
         }
-        // winning and advantage cases
-        else if (this.player1.getScore() >=4 || this.player2.getScore() >=4)
-        {
-            int minusResult = this.player1.getScore() - this.player2.getScore();
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+        else if(isGameAdvantage()){
+            return getScoreStringWhenAdvantage();
+        }
+        else if(isGameEnded()){
+            return  getScoreStringWhenEnded();
         }
         else
         {
@@ -67,6 +64,27 @@ public class TennisGame1 implements TennisGame {
             }
         }
         return score;
+    }
+
+    private String getScoreStringWhenAdvantage() {
+        return (player1.getScore() > player2.getScore()) ? "Advantage player1" : "Advantage player2";
+    }
+    private  String getScoreStringWhenEnded(){
+        return (player1.getScore() > player2.getScore()) ? "Win for player1" : "Win for player2";
+    }
+
+    private boolean isAnyPlayerScoreGreaterOrEqualFour() {
+        return this.player1.getScore() >= 4 || this.player2.getScore() >= 4;
+    }
+
+    private boolean isGameEnded(){
+        int scoreDifference = Math.abs(this.player1.getScore() - this.player2.getScore());
+        return isAnyPlayerScoreGreaterOrEqualFour() && (scoreDifference >= 2);
+    }
+
+    private boolean isGameAdvantage(){
+        int scoreDifference = Math.abs(this.player1.getScore() - this.player2.getScore());
+        return isAnyPlayerScoreGreaterOrEqualFour() && (scoreDifference == 1);
     }
 
     private boolean isScoreTied() {
