@@ -5,16 +5,17 @@ public class TennisGame1 implements TennisGame {
     private String player1Name;
     private String player2Name;
 
-    public TennisGame1(String player1Name,String player2Name) {
+    public TennisGame1(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == player1Name)
+        if (playerName == player1Name) {
             player1Score += 1;
-        else
+        } else {
             player2Score += 1;
+        }
     }
 
     private boolean isGameTied() {
@@ -34,9 +35,20 @@ public class TennisGame1 implements TennisGame {
         }
     }
 
-    private boolean isWinningOrAdvantageStatus() {
+    private boolean isLateGame() {
         return player1Score >= 4 || player2Score >= 4;
     }
+
+    private boolean isGameAtAdvantage() {
+        int scoreDelta = player1Score - player2Score;
+        return isLateGame() && Math.abs(scoreDelta) == 1;
+    }
+
+    private boolean isGameWon() {
+        int scoreDelta = player1Score - player2Score;
+        return isLateGame() && Math.abs(scoreDelta) >= 2;
+    }
+
 
     private String getScoreFromInteger(int score) {
         switch (score) {
@@ -55,23 +67,26 @@ public class TennisGame1 implements TennisGame {
         int scoreDelta = player1Score - player2Score;
 
         if (scoreDelta == 1) {
-            return "Advantage "+player1Name;
+            return "Advantage " + player1Name;
         } else if (scoreDelta == -1) {
-            return "Advantage "+player2Name;
+            return "Advantage " + player2Name;
         } else if (scoreDelta >= 2) {
-            return "Win for "+player1Name;
+            return "Win for " + player1Name;
         } else {
-            return "Win for "+player2Name;
+            return "Win for " + player2Name;
         }
     }
 
     public String getScore() {
         if (isGameTied()) {
             return getScoreWhenGameIsTied();
-        } else if (isWinningOrAdvantageStatus()) {
+        } else if (isGameAtAdvantage()) {
             return getScoreWhenGameIsAtWinningOrAdvantageStatus();
-        } else {
-            return String.format("%s-%s", getScoreFromInteger(player1Score), getScoreFromInteger(player2Score));
+        } else if (isGameWon()) {
+            return getScoreWhenGameIsAtWinningOrAdvantageStatus();
+        } else{
+            return String.format("%s-%s", getScoreFromInteger(player1Score),
+                getScoreFromInteger(player2Score));
         }
     }
 }
