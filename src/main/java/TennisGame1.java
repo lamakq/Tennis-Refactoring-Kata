@@ -1,4 +1,5 @@
 import domain.Player;
+import domain.Score;
 
 import static utills.AppConstant.ADVANTAGE;
 import static utills.AppConstant.ALL;
@@ -17,7 +18,6 @@ public class TennisGame1 implements TennisGame {
     private Player player2;
 
     public TennisGame1(String player1Name, String player2Name) {
-
         player1 = new Player(player1Name, DEFAULT_SCORE);
         player2 = new Player(player2Name, DEFAULT_SCORE);
     }
@@ -32,7 +32,7 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         String score = "";
         if (areScoresEqual()) {
-            score = handleScoreEqualCase();
+            score = player1.handleScoreEqualCase();
         } else if (isAdvantageOrWinningCase()) {
             score = handleAdvantageOrWinningCase();
         } else {
@@ -50,26 +50,10 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String handleNormalCase(String score) {
-
-        score += getScoreDisplayName(player1.getScore());
+        score += player1.getScoreDisplayName();
         score = score + "-";
-        score += getScoreDisplayName(player2.getScore());
+        score += player2.getScoreDisplayName();
         return score;
-    }
-
-    private String getScoreDisplayName(int tempScore) {
-        switch (tempScore) {
-            case 0:
-                return LOVE;
-            case 1:
-                return FIFTEEN;
-            case 2:
-                return THIRTY;
-            case 3:
-                return FORTY;
-            default:
-                return "";
-        }
     }
 
     private String handleAdvantageOrWinningCase() {
@@ -99,18 +83,5 @@ public class TennisGame1 implements TennisGame {
 
     private int getPlayerScoreDifference() {
         return player1.getScore() - player2.getScore();
-    }
-
-    private String handleScoreEqualCase() {
-        switch (player1.getScore()) {
-            case 0:
-                return LOVE + "-" + ALL;
-            case 1:
-                return FIFTEEN + "-" + ALL;
-            case 2:
-                return THIRTY + "-" + ALL;
-            default:
-                return DEUCE;
-        }
     }
 }
