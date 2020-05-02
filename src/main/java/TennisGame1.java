@@ -24,22 +24,7 @@ public class TennisGame1 implements TennisGame {
         // scores are equal
         if (player1Score == player2Score)
         {
-            switch (player1Score)
-            {
-                case 0:
-                        score = "Love-All";
-                    break;
-                case 1:
-                        score = "Fifteen-All";
-                    break;
-                case 2:
-                        score = "Thirty-All";
-                    break;
-                default:
-                        score = "Deuce";
-                    break;
-                
-            }
+            score = calculateScoreWhenPlayerScoreIsEqual();
         }
         // winning and advantage cases
         else if (player1Score >=4 || player2Score >=4)
@@ -72,6 +57,27 @@ public class TennisGame1 implements TennisGame {
                         break;
                 }
             }
+        }
+        return score;
+    }
+
+    private String calculateScoreWhenPlayerScoreIsEqual() {
+        String score;
+        switch (player1Score)
+        {
+            case 0:
+                    score = "Love-All";
+                break;
+            case 1:
+                    score = "Fifteen-All";
+                break;
+            case 2:
+                    score = "Thirty-All";
+                break;
+            default:
+                    score = "Deuce";
+                break;
+
         }
         return score;
     }
