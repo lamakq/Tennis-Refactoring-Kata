@@ -28,37 +28,33 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String score = "";
-        int tempScore=0;
+        int tempScore = 0;
         // scores are equal
-        if (isScoreTied())
-        {
+        if (isScoreTied()) {
             return getScoreStringWhenTied(this.player1.getScore());
-        }
-        else if(isGameAdvantage()){
+        } else if (isGameAdvantage()) {
             return getScoreStringWhenAdvantage();
-        }
-        else if(isGameEnded()){
-            return  getScoreStringWhenEnded();
-        }
-        else
-        {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = this.player1.getScore();
-                else { score+="-"; tempScore = this.player2.getScore();}
-                switch(tempScore)
-                {
+        } else if (isGameEnded()) {
+            return getScoreStringWhenEnded();
+        } else {
+            for (int i = 1; i < 3; i++) {
+                if (i == 1) tempScore = this.player1.getScore();
+                else {
+                    score += "-";
+                    tempScore = this.player2.getScore();
+                }
+                switch (tempScore) {
                     case 0:
-                        score+="Love";
+                        score += "Love";
                         break;
                     case 1:
-                        score+="Fifteen";
+                        score += "Fifteen";
                         break;
                     case 2:
-                        score+="Thirty";
+                        score += "Thirty";
                         break;
                     case 3:
-                        score+="Forty";
+                        score += "Forty";
                         break;
                 }
             }
@@ -69,7 +65,8 @@ public class TennisGame1 implements TennisGame {
     private String getScoreStringWhenAdvantage() {
         return (player1.getScore() > player2.getScore()) ? "Advantage player1" : "Advantage player2";
     }
-    private  String getScoreStringWhenEnded(){
+
+    private String getScoreStringWhenEnded() {
         return (player1.getScore() > player2.getScore()) ? "Win for player1" : "Win for player2";
     }
 
@@ -77,12 +74,12 @@ public class TennisGame1 implements TennisGame {
         return this.player1.getScore() >= 4 || this.player2.getScore() >= 4;
     }
 
-    private boolean isGameEnded(){
+    private boolean isGameEnded() {
         int scoreDifference = Math.abs(this.player1.getScore() - this.player2.getScore());
         return isAnyPlayerScoreGreaterOrEqualFour() && (scoreDifference >= 2);
     }
 
-    private boolean isGameAdvantage(){
+    private boolean isGameAdvantage() {
         int scoreDifference = Math.abs(this.player1.getScore() - this.player2.getScore());
         return isAnyPlayerScoreGreaterOrEqualFour() && (scoreDifference == 1);
     }
