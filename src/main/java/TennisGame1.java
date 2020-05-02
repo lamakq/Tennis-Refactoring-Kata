@@ -39,7 +39,7 @@ public class TennisGame1 implements TennisGame {
 
     private String handleNormalCase(String score) {
         score += player1.getScoreDisplayName();
-        score = score + "-";
+        score += "-";
         score += player2.getScoreDisplayName();
         return score;
     }
