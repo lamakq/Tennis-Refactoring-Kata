@@ -5,6 +5,9 @@ public class TennisGame1 implements TennisGame {
     private String player1Name;
     private String player2Name;
 
+    private TennisPlayer player1;
+    private TennisPlayer player2;
+
     public TennisGame1(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
@@ -22,19 +25,6 @@ public class TennisGame1 implements TennisGame {
         return player1Score == player2Score;
     }
 
-    private String getScoreWhenGameIsTied() {
-        switch (player1Score) {
-            case 0:
-                return "Love-All";
-            case 1:
-                return "Fifteen-All";
-            case 2:
-                return "Thirty-All";
-            default:
-                return "Deuce";
-        }
-    }
-
     private boolean isLateGame() {
         return player1Score >= 4 || player2Score >= 4;
     }
@@ -50,19 +40,6 @@ public class TennisGame1 implements TennisGame {
     }
 
 
-    private String getScoreFromInteger(int score) {
-        switch (score) {
-            case 0:
-                return "Love";
-            case 1:
-                return "Fifteen";
-            case 2:
-                return "Thirty";
-            default:
-                return "Forty";
-        }
-    }
-
     private String getScoreWhenGameIsAtAdvantage() {
         return "Advantage " + getPlayerAtAdvantage();
     }
@@ -77,7 +54,7 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         if (isGameTied()) {
-            return getScoreWhenGameIsTied();
+            return ScoreHelper.getScoreWhenGameIsTied(player1Score);
         } else if (isGameAtAdvantage()) {
             return getScoreWhenGameIsAtAdvantage();
         } else if (isGameWon()) {
@@ -88,7 +65,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String getFormattedScore() {
-        return String.format("%s-%s", getScoreFromInteger(player1Score),
-            getScoreFromInteger(player2Score));
+        return String.format("%s-%s", ScoreHelper.getScoreFromInteger(player1Score),
+            ScoreHelper.getScoreFromInteger(player2Score));
     }
 }
