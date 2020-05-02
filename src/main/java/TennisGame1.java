@@ -60,11 +60,20 @@ public class TennisGame1 implements TennisGame {
     private String getDisplayTextForWinOrAdvantage() {
         String score;
         int minusResult = player1Score - player2Score;
-        if (scoreIsEqual(minusResult, 1)) score ="Advantage player1";
-        else if (scoreIsEqual(minusResult, -1)) score ="Advantage player2";
+        if (advantageForPlayer1()) score ="Advantage player1";
+        else if (advantageForPlayer2()) score ="Advantage player2";
         else if (minusResult>=2) score = "Win for player1";
         else score ="Win for player2";
         return score;
+    }
+
+    private boolean advantageForPlayer1() {
+        return (player1Score - player2Score) == 1;
+
+    }
+    private boolean advantageForPlayer2() {
+        return (player2Score - player1Score) == 1;
+
     }
 
     private boolean eitherPlayerScoreIsGreaterThanEqualTo4() {
