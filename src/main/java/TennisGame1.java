@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TennisGame1 implements TennisGame {
 
@@ -16,15 +17,24 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        players.stream().filter(player -> player.getName().equals(playerName)).findFirst().get().incrementScore();
+        players.stream()
+                .filter(player -> player.getName().equals(playerName))
+                .findFirst()
+                .get()
+                .incrementScore();
     }
 
     private boolean isGameTied() {
-        return player1.getScore() == player2.getScore();
+        return players.stream()
+                .map(TennisPlayer::getScore)
+                .distinct()
+                .count() == 1;
     }
 
     private boolean isLateGame() {
-        return player1.getScore() >= 4 || player2.getScore() >= 4;
+        return players.stream()
+                .map(TennisPlayer::getScore)
+                .anyMatch(score -> score >= 4);
     }
 
     private boolean isGameAtAdvantage() {
@@ -37,7 +47,6 @@ public class TennisGame1 implements TennisGame {
         return isLateGame() && Math.abs(scoreDelta) >= 2;
     }
 
-
     private String getScoreWhenGameIsAtAdvantage() {
         return "Advantage " + getPlayerAtAdvantage();
     }
@@ -47,7 +56,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String getPlayerAtAdvantage() {
-        return player1.getScore() > player2.getScore() ? player1.getName() : player2.getName();
+        return players.stream().max(TennisPlayer::compareTo).get().getName();
     }
 
     public String getScore() {
@@ -63,7 +72,9 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String getFormattedScore() {
-        return String.format("%s-%s", ScoreHelper.getScoreFromInteger(player1.getScore()),
-            ScoreHelper.getScoreFromInteger(player2.getScore()));
+        return players.stream()
+                .map(TennisPlayer::getScore)
+                .map(ScoreHelper::getScoreFromInteger)
+                .collect(Collectors.joining("-"));
     }
 }

@@ -1,4 +1,4 @@
-public class TennisPlayer {
+public class TennisPlayer implements Comparable<TennisPlayer> {
 
     String name;
     Integer score;
@@ -18,5 +18,10 @@ public class TennisPlayer {
 
     public void incrementScore() {
         this.score++;
+    }
+
+    @Override
+    public int compareTo(TennisPlayer other) {
+        return this.getScore() - other.getScore();
     }
 }
