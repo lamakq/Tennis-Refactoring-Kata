@@ -18,29 +18,28 @@ public class TennisGame1 implements TennisGame {
             player2Score += 1;
     }
 
+    private boolean isGameTied() {
+        return player1Score == player2Score;
+    }
+
+    private String getScoreWhenGameIsTied() {
+        switch (player1Score)
+        {
+            case 0:  return "Love-All";
+            case 1:  return "Fifteen-All";
+            case 2:  return "Thirty-All";
+            default: return "Deuce";
+        }
+    }
+
     public String getScore() {
         String score = "";
         int tempScore=0;
-        // scores are equal
-        if (player1Score == player2Score)
-        {
-            switch (player1Score)
-            {
-                case 0:
-                        score = "Love-All";
-                    break;
-                case 1:
-                        score = "Fifteen-All";
-                    break;
-                case 2:
-                        score = "Thirty-All";
-                    break;
-                default:
-                        score = "Deuce";
-                    break;
-                
-            }
+
+        if (isGameTied()) {
+            score = getScoreWhenGameIsTied();
         }
+
         // winning and advantage cases
         else if (player1Score >=4 || player2Score >=4)
         {
