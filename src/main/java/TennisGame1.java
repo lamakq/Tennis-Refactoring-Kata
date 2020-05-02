@@ -23,24 +23,15 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-
-
-
         if (scoreIsEqual(player1Score, player2Score))
         {
             return getDisplayTextForEqualScore();
-
-
         }
         else if (eitherPlayerScoreIsGreaterThanEqualTo4())
         {
             return getDisplayTextForWinOrAdvantage();
-
         }
-
         return getDisplayTextForPlayerScore(player1Score) + "-" + getDisplayTextForPlayerScore(player2Score);
-
-
     }
 
     private String getDisplayTextForPlayerScore(int tempScore) {
@@ -58,13 +49,16 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String getDisplayTextForWinOrAdvantage() {
-        String score;
-        int minusResult = player1Score - player2Score;
-        if (advantageForPlayer1()) score ="Advantage player1";
-        else if (advantageForPlayer2()) score ="Advantage player2";
-        else if (minusResult>=2) score = "Win for player1";
-        else score ="Win for player2";
-        return score;
+
+        if (advantageForPlayer1()) return "Advantage player1";
+        else if (advantageForPlayer2()) return "Advantage player2";
+        else if (player1Won()) return "Win for player1";
+        return "Win for player2";
+
+    }
+
+    private boolean player1Won() {
+        return (player1Score - player2Score)>=2;
     }
 
     private boolean advantageForPlayer1() {
