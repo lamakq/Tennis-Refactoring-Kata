@@ -30,24 +30,9 @@ public class TennisGame1 implements TennisGame {
         String score = "";
         int tempScore=0;
         // scores are equal
-        if (this.player1.getScore() == this.player2.getScore())
+        if (isScoreTied())
         {
-            switch (this.player1.getScore())
-            {
-                case 0:
-                        score = "Love-All";
-                    break;
-                case 1:
-                        score = "Fifteen-All";
-                    break;
-                case 2:
-                        score = "Thirty-All";
-                    break;
-                default:
-                        score = "Deuce";
-                    break;
-                
-            }
+            score = getScoreStringWhenTied(this.player1.getScore());
         }
         // winning and advantage cases
         else if (this.player1.getScore() >=4 || this.player2.getScore() >=4)
@@ -82,5 +67,24 @@ public class TennisGame1 implements TennisGame {
             }
         }
         return score;
+    }
+
+    private boolean isScoreTied() {
+        return this.player1.getScore() == this.player2.getScore();
+    }
+
+    private String getScoreStringWhenTied(int score) {
+
+        switch (score) {
+            case 0:
+                return "Love-All";
+            case 1:
+                return "Fifteen-All";
+            case 2:
+                return "Thirty-All";
+            default:
+                return "Deuce";
+        }
+
     }
 }
