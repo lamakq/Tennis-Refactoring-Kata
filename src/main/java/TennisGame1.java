@@ -48,27 +48,32 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String handleNormalCase(String score) {
-        int tempScore=0;
-        for (int i=1; i<3; i++)
-        {
-            if (i==1) tempScore = player1Score;
-            else { score+="-"; tempScore = player2Score;}
-            switch(tempScore)
-            {
+        int tempScore = 0;
+        StringBuilder scoreBuilder = new StringBuilder(score);
+        for (int i = 1; i < 3; i++) {
+            if (i == 1) {
+                tempScore = player1Score;
+            }
+            else {
+                scoreBuilder.append("-");
+                tempScore = player2Score;
+            }
+            switch (tempScore) {
                 case 0:
-                    score+=LOVE;
+                    scoreBuilder.append(LOVE);
                     break;
                 case 1:
-                    score+=FIFTEEN;
+                    scoreBuilder.append(FIFTEEN);
                     break;
                 case 2:
-                    score+=THIRTY;
+                    scoreBuilder.append(THIRTY);
                     break;
                 case 3:
-                    score+=FORTY;
+                    scoreBuilder.append(FORTY);
                     break;
             }
         }
+        score = scoreBuilder.toString();
         return score;
     }
 
