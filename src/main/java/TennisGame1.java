@@ -37,33 +37,25 @@ public class TennisGame1 implements TennisGame {
         }
         else
         {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = player1Score;
-                else { score+="-"; tempScore = player2Score;}
-                score = getDisplayTextForPlayerScore(score, tempScore);
-            }
+            score = getDisplayTextForPlayerScore(player1Score);
+            score += "-";
+            score += getDisplayTextForPlayerScore(player2Score);
         }
         return score;
     }
 
-    private String getDisplayTextForPlayerScore(String score, int tempScore) {
+    private String getDisplayTextForPlayerScore(int tempScore) {
         switch(tempScore)
         {
             case 0:
-                score+="Love";
-                break;
+                return "Love";
             case 1:
-                score+="Fifteen";
-                break;
+                return "Fifteen";
             case 2:
-                score+="Thirty";
-                break;
-            case 3:
-                score+="Forty";
-                break;
+                return "Thirty";
+            default:
+                return "Forty";
         }
-        return score;
     }
 
     private String getDisplayTextForWinOrAdvantage() {
