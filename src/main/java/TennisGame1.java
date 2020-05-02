@@ -11,12 +11,7 @@ import static utills.AppConstant.WIN;
 
 public class TennisGame1 implements TennisGame {
 
-    private static int DEFAULT_SCORE = 0;
-    private int player1Score = 0;
-    private int player2Score = 0;
-
-    //private String player1.getName();
-    //private String player2.getName();
+    private static final int DEFAULT_SCORE = 0;
 
     private Player player1;
     private Player player2;
@@ -29,9 +24,9 @@ public class TennisGame1 implements TennisGame {
 
     public void wonPoint(String playerName) {
         if (playerName.equals(player1.getName()))
-            player1Score += 1;
+            player1.wonPoint();
         else
-            player2Score += 1;
+            player2.wonPoint();
     }
 
     public String getScore() {
@@ -47,18 +42,18 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean areScoresEqual() {
-        return player1Score == player2Score;
+        return player1.getScore() == player2.getScore();
     }
 
     private boolean isAdvantageOrWinningCase() {
-        return player1Score >= 4 || player2Score >= 4;
+        return player1.getScore() >= 4 || player2.getScore() >= 4;
     }
 
     private String handleNormalCase(String score) {
 
-        score += getScoreDisplayName(player1Score);
+        score += getScoreDisplayName(player1.getScore());
         score = score + "-";
-        score += getScoreDisplayName(player2Score);
+        score += getScoreDisplayName(player2.getScore());
         return score;
     }
 
@@ -103,11 +98,11 @@ public class TennisGame1 implements TennisGame {
     }
 
     private int getPlayerScoreDifference() {
-        return player1Score - player2Score;
+        return player1.getScore() - player2.getScore();
     }
 
     private String handleScoreEqualCase() {
-        switch (player1Score) {
+        switch (player1.getScore()) {
             case 0:
                 return LOVE + "-" + ALL;
             case 1:
