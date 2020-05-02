@@ -12,13 +12,13 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (Player1(playerName))
+        if (player1(playerName))
             player1Score += 1;
         else
             player2Score += 1;
     }
 
-    private boolean Player1(String playerName) {
+    private boolean player1(String playerName) {
         return playerName == "player1";
     }
 
@@ -28,22 +28,7 @@ public class TennisGame1 implements TennisGame {
         // scores are equal
         if (scoreIsEqual(player1Score, player2Score))
         {
-            switch (player1Score)
-            {
-                case 0:
-                        score = "Love-All";
-                    break;
-                case 1:
-                        score = "Fifteen-All";
-                    break;
-                case 2:
-                        score = "Thirty-All";
-                    break;
-                default:
-                        score = "Deuce";
-                    break;
-                
-            }
+            score = getDisplayTextForEqualScore();
         }
         // winning and advantage cases
         else if (player1Score >=4 || player2Score >=4)
@@ -76,6 +61,27 @@ public class TennisGame1 implements TennisGame {
                         break;
                 }
             }
+        }
+        return score;
+    }
+
+    private String getDisplayTextForEqualScore() {
+        String score;
+        switch (player1Score)
+        {
+            case 0:
+                    score = "Love-All";
+                break;
+            case 1:
+                    score = "Fifteen-All";
+                break;
+            case 2:
+                    score = "Thirty-All";
+                break;
+            default:
+                    score = "Deuce";
+                break;
+
         }
         return score;
     }
