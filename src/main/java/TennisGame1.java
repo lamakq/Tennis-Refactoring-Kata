@@ -71,10 +71,6 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String handleAdvantageOrWinningCase() {
-        return getScoreTypeByDifference();
-    }
-
-    private String getScoreTypeByDifference() {
         if (isAdvantagePlayer1()) {
             return ADVANTAGE + player1Name;
         }
