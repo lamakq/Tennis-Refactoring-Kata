@@ -12,10 +12,6 @@ public class TennisPlayer {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Integer getScore() {
         return score;
     }

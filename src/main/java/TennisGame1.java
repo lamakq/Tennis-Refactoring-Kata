@@ -1,19 +1,22 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class TennisGame1 implements TennisGame {
 
     private TennisPlayer player1;
     private TennisPlayer player2;
 
+    private List<TennisPlayer> players;
+
     public TennisGame1(String player1Name, String player2Name) {
         this.player1 = new TennisPlayer(player1Name);
         this.player2 = new TennisPlayer(player2Name);
+
+        this.players = Arrays.asList(this.player1, this.player2);
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == player1.getName()) {
-            player1.incrementScore();
-        } else {
-            player2.incrementScore();
-        }
+        players.stream().filter(player -> player.getName().equals(playerName)).findFirst().get().incrementScore();
     }
 
     private boolean isGameTied() {
