@@ -4,11 +4,13 @@ public class TennisGame1 implements TennisGame {
 
     private int player1Score = 0;
     private int player2Score = 0;
+    private String score;
 
     public TennisGame1(String player1Name, String player2Name) {
     }
 
     public TennisGame1() {
+        resetScore();
     }
 
     public void wonPoint(String playerName) {
@@ -19,6 +21,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
+        resetScore();
         if (isEqualValues(player1Score, player2Score)) {
             return calculateScoreWhenPlayerScoreIsEqual();
         }
@@ -27,6 +30,10 @@ public class TennisGame1 implements TennisGame {
         } else {
             return calculateScoreForEachPlayerTurn();
         }
+    }
+
+    private void resetScore() {
+        score = "";
     }
 
     private boolean isWinningOrAdvantageCase() {
@@ -38,7 +45,6 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String calculateScoreForEachPlayerTurn() {
-        String score = "";
         int tempScore = 0;
         for (int i = 1; i < 3; i++) {
             if (isEqualValues(i, 1)) tempScore = player1Score;
@@ -70,7 +76,6 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String checkForWinningOrAdvantageCase() {
-        String score;
         int minusResult = player1Score - player2Score;
         if (isEqualValues(minusResult, 1)) score = "Advantage player1";
         else if (isEqualValues(minusResult, -1)) score = "Advantage player2";
@@ -80,7 +85,6 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String calculateScoreWhenPlayerScoreIsEqual() {
-        String score;
         switch (player1Score) {
             case 0:
                 score = "Love-All";
