@@ -63,28 +63,26 @@ public class TennisGame1 implements TennisGame {
         }
     }
 
-    private String getScoreWhenGameIsAtWinningOrAdvantageStatus() {
-        int scoreDelta = player1Score - player2Score;
+    private String getScoreWhenGameIsAtAdvantage() {
+        return "Advantage " + getPlayerAtAdvantage();
+    }
 
-        if (scoreDelta == 1) {
-            return "Advantage " + player1Name;
-        } else if (scoreDelta == -1) {
-            return "Advantage " + player2Name;
-        } else if (scoreDelta >= 2) {
-            return "Win for " + player1Name;
-        } else {
-            return "Win for " + player2Name;
-        }
+    private String getScoreWhenGameIsWon() {
+        return "Win for " + getPlayerAtAdvantage();
+    }
+
+    private String getPlayerAtAdvantage() {
+        return player1Score > player2Score ? player1Name : player2Name;
     }
 
     public String getScore() {
         if (isGameTied()) {
             return getScoreWhenGameIsTied();
         } else if (isGameAtAdvantage()) {
-            return getScoreWhenGameIsAtWinningOrAdvantageStatus();
+            return getScoreWhenGameIsAtAdvantage();
         } else if (isGameWon()) {
-            return getScoreWhenGameIsAtWinningOrAdvantageStatus();
-        } else{
+            return getScoreWhenGameIsWon();
+        } else {
             return String.format("%s-%s", getScoreFromInteger(player1Score),
                 getScoreFromInteger(player2Score));
         }
