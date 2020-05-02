@@ -25,14 +25,9 @@ public class TennisGame1 implements TennisGame {
 
         if (areScoresEqual()) {
             score = handleScoreEqualCase();
-        }
-        // winning and advantage cases
-        else if (isAdvantageOrWinningCase())
-        {
-            score = handleAdvantageCase();
-        }
-        else
-        {
+        } else if (isAdvantageOrWinningCase()) {
+            score = handleAdvantageOrWinningCase();
+        } else {
             score = handleNormalCase(score);
         }
         return score;
@@ -71,14 +66,23 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
-    private String handleAdvantageCase() {
+    private String handleAdvantageOrWinningCase() {
         String score;
-        int minusResult = player1Score - player2Score;
-        if (minusResult==1) score ="Advantage player1";
-        else if (minusResult ==-1) score ="Advantage player2";
-        else if (minusResult>=2) score = "Win for player1";
-        else score ="Win for player2";
+        int scoreDifference = getPlayerScoreDifference();
+        if (scoreDifference == 1) {
+            score = "Advantage player1";
+        } else if (scoreDifference == -1) {
+            score = "Advantage player2";
+        } else if (scoreDifference >= 2) {
+            score = "Win for player1";
+        } else {
+            score = "Win for player2";
+        }
         return score;
+    }
+
+    private int getPlayerScoreDifference() {
+        return player1Score - player2Score;
     }
 
     private String handleScoreEqualCase() {
