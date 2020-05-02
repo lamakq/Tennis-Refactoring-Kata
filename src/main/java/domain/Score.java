@@ -9,8 +9,14 @@ import static utills.AppConstant.THIRTY;
 
 public class Score {
 
-    public String handleScoreEqualCase(Player player) {
-        switch (player.getScore()) {
+    private int score;
+
+    public Score(){
+        this.score= 0;
+    }
+
+    public String handleScoreEqualCase() {
+        switch (score) {
             case 0:
                 return LOVE + "-" + ALL;
             case 1:
@@ -22,8 +28,8 @@ public class Score {
         }
     }
 
-    public String getScoreDisplayName(Player player) {
-        switch (player.getScore()) {
+    public String getScoreDisplayName() {
+        switch (score) {
             case 0:
                 return LOVE;
             case 1:
@@ -35,5 +41,13 @@ public class Score {
             default:
                 return "";
         }
+    }
+
+    public void addScore() {
+        score++;
+    }
+
+    public int getScore() {
+        return score;
     }
 }

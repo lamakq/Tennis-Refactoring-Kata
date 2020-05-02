@@ -3,12 +3,10 @@ package domain;
 public class Player {
 
     private String name;
-    private int score;
     private Score playerScore;
 
-    public Player(String name, int score) {
+    public Player(String name) {
         this.name = name;
-        this.score = score;
         this.playerScore = new Score();
     }
 
@@ -17,18 +15,18 @@ public class Player {
     }
 
     public int getScore() {
-        return score;
+        return playerScore.getScore();
     }
 
     public void wonPoint() {
-        score++;
+        playerScore.addScore();
     }
 
     public String handleScoreEqualCase() {
-        return this.playerScore.handleScoreEqualCase(this);
+        return this.playerScore.handleScoreEqualCase();
     }
 
     public String getScoreDisplayName() {
-        return this.playerScore.getScoreDisplayName(this);
+        return this.playerScore.getScoreDisplayName();
     }
 }

@@ -1,25 +1,16 @@
 import domain.Player;
-import domain.Score;
 
 import static utills.AppConstant.ADVANTAGE;
-import static utills.AppConstant.ALL;
-import static utills.AppConstant.DEUCE;
-import static utills.AppConstant.FIFTEEN;
-import static utills.AppConstant.FORTY;
-import static utills.AppConstant.LOVE;
-import static utills.AppConstant.THIRTY;
 import static utills.AppConstant.WIN;
 
 public class TennisGame1 implements TennisGame {
-
-    private static final int DEFAULT_SCORE = 0;
 
     private Player player1;
     private Player player2;
 
     public TennisGame1(String player1Name, String player2Name) {
-        player1 = new Player(player1Name, DEFAULT_SCORE);
-        player2 = new Player(player2Name, DEFAULT_SCORE);
+        player1 = new Player(player1Name);
+        player2 = new Player(player2Name);
     }
 
     public void wonPoint(String playerName) {
