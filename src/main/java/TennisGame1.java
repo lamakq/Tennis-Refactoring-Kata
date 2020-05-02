@@ -23,25 +23,27 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore=0;
-        // scores are equal
+
+
+
         if (scoreIsEqual(player1Score, player2Score))
         {
-            score = getDisplayTextForEqualScore();
+            return getDisplayTextForEqualScore();
+
+
         }
-        // winning and advantage cases
         else if (eitherPlayerScoreIsGreaterThanEqualTo4())
         {
-            score = getDisplayTextForWinOrAdvantage();
+            return getDisplayTextForWinOrAdvantage();
+
         }
-        else
-        {
-            score = getDisplayTextForPlayerScore(player1Score);
-            score += "-";
-            score += getDisplayTextForPlayerScore(player2Score);
-        }
+        String score = "";
+        score = getDisplayTextForPlayerScore(player1Score);
+        score += "-";
+        score += getDisplayTextForPlayerScore(player2Score);
         return score;
+
+
     }
 
     private String getDisplayTextForPlayerScore(int tempScore) {
