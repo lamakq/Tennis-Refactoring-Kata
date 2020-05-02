@@ -18,7 +18,7 @@ public class TennisTest {
     @Parameter(2)
     public String expectedScore;
     
-    @Parameters
+    @Parameters(name = "scores = ({0}, {1}), expected = {2}")
     public static Collection<Object[]> getAllScores() {
         return Arrays.asList(new Object[][] {
 

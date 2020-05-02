@@ -1,3 +1,5 @@
+import GameStates.GameState;
+import GameStates.GameStateFactory;
 
 public class TennisGame1 implements TennisGame {
 
@@ -27,70 +29,10 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        if (isScoreTied()) {
-            return getScoreStringWhenTied(this.player1.getScore());
-        } else if (isGameAdvantage()) {
-            return getScoreStringWhenAdvantage();
-        } else if (isGameEnded()) {
-            return getScoreStringWhenEnded();
-        } else if (areScoresDifferentAndLessThanFour()) {
-            return getScoreStringWhenScoresDifferentAndLessThanFour();
-        }
-        return "";
-    }
+        int player1Score = player1.getScore();
+        int player2Score = player2.getScore();
 
-    private String getScoreStringWhenScoresDifferentAndLessThanFour() {
-        return mapScoreToString(player1.getScore()) + "-" + mapScoreToString(player2.getScore());
-    }
-
-    private String mapScoreToString(int score) {
-        switch (score) {
-            case 0:
-                return "Love";
-            case 1:
-                return "Fifteen";
-            case 2:
-                return "Thirty";
-            case 3:
-                return  "Forty";
-        }
-        return "";
-    }
-
-    private boolean areScoresDifferentAndLessThanFour() {
-        return !isScoreTied() && Math.max(player1.getScore(), player2.getScore()) < 4;
-    }
-
-    private String getScoreStringWhenAdvantage() {
-        return (player1.getScore() > player2.getScore()) ? "Advantage player1" : "Advantage player2";
-    }
-
-    private String getScoreStringWhenEnded() {
-        return (player1.getScore() > player2.getScore()) ? "Win for player1" : "Win for player2";
-    }
-
-    private boolean isAnyPlayerScoreGreaterOrEqualFour() {
-        return this.player1.getScore() >= 4 || this.player2.getScore() >= 4;
-    }
-
-    private boolean isGameEnded() {
-        int scoreDifference = Math.abs(this.player1.getScore() - this.player2.getScore());
-        return isAnyPlayerScoreGreaterOrEqualFour() && (scoreDifference >= 2);
-    }
-
-    private boolean isGameAdvantage() {
-        int scoreDifference = Math.abs(this.player1.getScore() - this.player2.getScore());
-        return isAnyPlayerScoreGreaterOrEqualFour() && (scoreDifference == 1);
-    }
-
-    private boolean isScoreTied() {
-        return this.player1.getScore() == this.player2.getScore();
-    }
-
-    private String getScoreStringWhenTied(int score) {
-        if (score < 3) {
-            return mapScoreToString(score) + "-All";
-        }
-        return "Deuce";
+        GameState gameState = GameStateFactory.getGameState(player1Score, player2Score);
+        return gameState.getStateString();
     }
 }

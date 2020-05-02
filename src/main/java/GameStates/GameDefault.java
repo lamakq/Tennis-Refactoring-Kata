@@ -1,8 +1,13 @@
 package GameStates;
 
 public class GameDefault extends GameState {
+
+    GameDefault(int player1Score, int player2Score) {
+        super(player1Score, player2Score);
+    }
+
     @Override
-    public String getStateString(int player1Score, int player2Score) {
+    public String getStateString() {
         if (areScoresEqual(player1Score, player2Score)){
            return getScoreStringWhenTied(player1Score);
         }
@@ -14,11 +19,9 @@ public class GameDefault extends GameState {
     }
 
     private boolean areScoresEqual(int player1Score, int player2Score) {
-
         return  player1Score == player2Score;
     }
-
-
+    
     private String mapScoreToString(int score) {
         switch (score) {
             case 0:
