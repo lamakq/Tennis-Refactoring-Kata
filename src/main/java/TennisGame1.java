@@ -10,7 +10,6 @@ public class TennisGame1 implements TennisGame {
     }
 
     public TennisGame1() {
-        resetScore();
     }
 
     public void wonPoint(String playerName) {
@@ -97,19 +96,14 @@ public class TennisGame1 implements TennisGame {
     private String calculateScoreWhenPlayerScoreIsEqual() {
         switch (player1Score) {
             case 0:
-                score = "Love-All";
-                break;
+                return "Love-All";
             case 1:
-                score = "Fifteen-All";
-                break;
+                return "Fifteen-All";
             case 2:
-                score = "Thirty-All";
-                break;
+                return "Thirty-All";
             default:
-                score = "Deuce";
-                break;
+                return "Deuce";
 
         }
-        return score;
     }
 }
