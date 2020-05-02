@@ -27,39 +27,38 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore = 0;
-        // scores are equal
         if (isScoreTied()) {
             return getScoreStringWhenTied(this.player1.getScore());
         } else if (isGameAdvantage()) {
             return getScoreStringWhenAdvantage();
         } else if (isGameEnded()) {
             return getScoreStringWhenEnded();
-        } else {
-            for (int i = 1; i < 3; i++) {
-                if (i == 1) tempScore = this.player1.getScore();
-                else {
-                    score += "-";
-                    tempScore = this.player2.getScore();
-                }
-                switch (tempScore) {
-                    case 0:
-                        score += "Love";
-                        break;
-                    case 1:
-                        score += "Fifteen";
-                        break;
-                    case 2:
-                        score += "Thirty";
-                        break;
-                    case 3:
-                        score += "Forty";
-                        break;
-                }
-            }
+        } else if (areScoresDifferentAndLessThanFour()) {
+            return getScoreStringWhenScoresDifferentAndLessThanFour();
         }
-        return score;
+        return "";
+    }
+
+    private String getScoreStringWhenScoresDifferentAndLessThanFour() {
+        return mapScoreToString(player1.getScore()) + "-" + mapScoreToString(player2.getScore());
+    }
+
+    private String mapScoreToString(int score) {
+        switch (score) {
+            case 0:
+                return "Love";
+            case 1:
+                return "Fifteen";
+            case 2:
+                return "Thirty";
+            case 3:
+                return  "Forty";
+        }
+        return "";
+    }
+
+    private boolean areScoresDifferentAndLessThanFour() {
+        return !isScoreTied() && Math.max(player1.getScore(), player2.getScore()) < 4;
     }
 
     private String getScoreStringWhenAdvantage() {
