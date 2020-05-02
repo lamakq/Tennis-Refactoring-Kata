@@ -45,20 +45,31 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String calculateScoreForEachPlayerTurn() {
-        int tempScore = 0;
+        int playerNumber = 0;
+        int playerScore = 0;
+
+
         for (int i = 1; i < 3; i++) {
-            if (isEqualValues(i, 1)) tempScore = player1Score;
-            else {
-                score += "-";
-                tempScore = player2Score;
-            }
-            score = appendScoreWhenPlayerScoreIsNotEqual(score, tempScore);
+            playerNumber = getPlayerTurn(i);
+            playerScore =  getPlayerScore(playerNumber);
+            appendScoreWhenPlayerScoreIsNotEqual(playerScore, playerNumber);
         }
         return score;
     }
 
-    private String appendScoreWhenPlayerScoreIsNotEqual(String score, int tempScore) {
-        switch (tempScore) {
+    private int getPlayerScore(int playerNumber) {
+        return (playerNumber == 1) ? player1Score : player2Score;
+    }
+
+    private int getPlayerTurn(int i) {
+        return i;
+    }
+
+    private void appendScoreWhenPlayerScoreIsNotEqual(int playerScore, int playerNumber) {
+        if (playerNumber == 2) {
+            score += "-";
+        }
+        switch (playerScore) {
             case 0:
                 score += "Love";
                 break;
@@ -72,7 +83,6 @@ public class TennisGame1 implements TennisGame {
                 score += "Forty";
                 break;
         }
-        return score;
     }
 
     private String checkForWinningOrAdvantageCase() {
