@@ -29,27 +29,38 @@ public class TennisGame1 implements TennisGame {
         else if (player1Score >= 4 || player2Score >= 4) {
             score = checkForWinningOrAdvantageCase();
         } else {
-            for (int i = 1; i < 3; i++) {
-                if (i == 1) tempScore = player1Score;
-                else {
-                    score += "-";
-                    tempScore = player2Score;
-                }
-                switch (tempScore) {
-                    case 0:
-                        score += "Love";
-                        break;
-                    case 1:
-                        score += "Fifteen";
-                        break;
-                    case 2:
-                        score += "Thirty";
-                        break;
-                    case 3:
-                        score += "Forty";
-                        break;
-                }
+            score = calculateScoreForEachPlayerTurn(score);
+        }
+        return score;
+    }
+
+    private String calculateScoreForEachPlayerTurn(String score) {
+        int tempScore;
+        for (int i = 1; i < 3; i++) {
+            if (i == 1) tempScore = player1Score;
+            else {
+                score += "-";
+                tempScore = player2Score;
             }
+            score = appendScoreWhenPlayerScoreIsNotEqual(score, tempScore);
+        }
+        return score;
+    }
+
+    private String appendScoreWhenPlayerScoreIsNotEqual(String score, int tempScore) {
+        switch (tempScore) {
+            case 0:
+                score += "Love";
+                break;
+            case 1:
+                score += "Fifteen";
+                break;
+            case 2:
+                score += "Thirty";
+                break;
+            case 3:
+                score += "Forty";
+                break;
         }
         return score;
     }
