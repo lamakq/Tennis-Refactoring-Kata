@@ -32,6 +32,28 @@ public class TennisGame1 implements TennisGame {
         }
     }
 
+    private boolean isWinningOrAdvantageStatus() {
+        return player1Score >= 4 || player2Score >= 4;
+    }
+
+    private String getScoreWhenGameIsAtWinningOrAdvantageStatus() {
+        int scoreDelta = player1Score - player2Score;
+
+        if (scoreDelta==1) {
+            return "Advantage player1";
+        }
+        else if (scoreDelta ==-1) {
+            return "Advantage player2";
+        }
+        else if (scoreDelta>=2) {
+            return "Win for player1";
+        }
+
+        else {
+            return "Win for player2";
+        }
+    }
+
     public String getScore() {
         String score = "";
         int tempScore=0;
@@ -40,17 +62,11 @@ public class TennisGame1 implements TennisGame {
             score = getScoreWhenGameIsTied();
         }
 
-        // winning and advantage cases
-        else if (player1Score >=4 || player2Score >=4)
-        {
-            int minusResult = player1Score - player2Score;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+        else if (isWinningOrAdvantageStatus()) {
+            score = getScoreWhenGameIsAtWinningOrAdvantageStatus();
         }
-        else
-        {
+
+        else {
             for (int i=1; i<3; i++)
             {
                 if (i==1) tempScore = player1Score;
