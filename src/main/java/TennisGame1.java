@@ -33,35 +33,46 @@ public class TennisGame1 implements TennisGame {
         // winning and advantage cases
         else if (eitherPlayerScoreIsGreaterThanEqualTo4())
         {
-            int minusResult = player1Score - player2Score;
-            if (scoreIsEqual(minusResult, 1)) score ="Advantage player1";
-            else if (scoreIsEqual(minusResult, -1)) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+            score = getDisplayTextForWinOrAdvantage();
         }
         else
         {
             for (int i=1; i<3; i++)
             {
-                if (scoreIsEqual(i, 1)) tempScore = player1Score;
+                if (i==1) tempScore = player1Score;
                 else { score+="-"; tempScore = player2Score;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
-                }
+                score = getDisplayTextForPlayerScore(score, tempScore);
             }
         }
+        return score;
+    }
+
+    private String getDisplayTextForPlayerScore(String score, int tempScore) {
+        switch(tempScore)
+        {
+            case 0:
+                score+="Love";
+                break;
+            case 1:
+                score+="Fifteen";
+                break;
+            case 2:
+                score+="Thirty";
+                break;
+            case 3:
+                score+="Forty";
+                break;
+        }
+        return score;
+    }
+
+    private String getDisplayTextForWinOrAdvantage() {
+        String score;
+        int minusResult = player1Score - player2Score;
+        if (scoreIsEqual(minusResult, 1)) score ="Advantage player1";
+        else if (scoreIsEqual(minusResult, -1)) score ="Advantage player2";
+        else if (minusResult>=2) score = "Win for player1";
+        else score ="Win for player2";
         return score;
     }
 
