@@ -67,18 +67,32 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String handleAdvantageOrWinningCase() {
-        String score;
-        int scoreDifference = getPlayerScoreDifference();
-        if (scoreDifference == 1) {
-            score = "Advantage player1";
-        } else if (scoreDifference == -1) {
-            score = "Advantage player2";
-        } else if (scoreDifference >= 2) {
-            score = "Win for player1";
-        } else {
-            score = "Win for player2";
+        return getScoreTypeByDifference();
+    }
+
+    private String getScoreTypeByDifference() {
+        if (isAdvantagePlayer1()) {
+            return "Advantage player1";
         }
-        return score;
+        if (isAdvantagePlayer2()) {
+            return "Advantage player2";
+        }
+        if (isWiningPlayer1()) {
+            return "Win for player1";
+        }
+        return "Win for player2";
+    }
+
+    private boolean isWiningPlayer1() {
+        return getPlayerScoreDifference() >= 2;
+    }
+
+    private boolean isAdvantagePlayer2() {
+        return getPlayerScoreDifference() == -1;
+    }
+
+    private boolean isAdvantagePlayer1() {
+        return getPlayerScoreDifference() == 1;
     }
 
     private int getPlayerScoreDifference() {
