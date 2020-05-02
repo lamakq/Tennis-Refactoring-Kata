@@ -29,4 +29,8 @@ public class Player {
     public String getScoreDisplayName() {
         return this.playerScore.getScoreDisplayName();
     }
+
+    public boolean areScoresEqual(Player player) {
+        return getScore() == player.getScore();
+    }
 }

@@ -22,7 +22,7 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String score = "";
-        if (areScoresEqual()) {
+        if (player1.areScoresEqual(player2)) {
             score = player1.handleScoreEqualCase();
         } else if (isAdvantageOrWinningCase()) {
             score = handleAdvantageOrWinningCase();
@@ -30,10 +30,6 @@ public class TennisGame1 implements TennisGame {
             score = handleNormalCase(score);
         }
         return score;
-    }
-
-    private boolean areScoresEqual() {
-        return player1.getScore() == player2.getScore();
     }
 
     private boolean isAdvantageOrWinningCase() {
