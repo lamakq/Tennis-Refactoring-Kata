@@ -1,14 +1,14 @@
+import java.util.HashMap;
 
 public class TennisGame1 implements TennisGame {
 
     private int player1Score = 0;
     private int player2Score = 0;
-    private String player1Name;
-    private String player2Name;
 
     public TennisGame1(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+    }
+
+    public TennisGame1() {
     }
 
     public void wonPoint(String playerName) {
@@ -19,16 +19,14 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
         if (isEqualValues(player1Score, player2Score)) {
-            score = calculateScoreWhenPlayerScoreIsEqual();
+            return calculateScoreWhenPlayerScoreIsEqual();
         }
         else if (isWinningOrAdvantageCase()) {
-            score = checkForWinningOrAdvantageCase();
+            return checkForWinningOrAdvantageCase();
         } else {
-            score = calculateScoreForEachPlayerTurn(score);
+            return calculateScoreForEachPlayerTurn();
         }
-        return score;
     }
 
     private boolean isWinningOrAdvantageCase() {
@@ -39,7 +37,8 @@ public class TennisGame1 implements TennisGame {
         return player1Score == player2Score;
     }
 
-    private String calculateScoreForEachPlayerTurn(String score) {
+    private String calculateScoreForEachPlayerTurn() {
+        String score = "";
         int tempScore = 0;
         for (int i = 1; i < 3; i++) {
             if (isEqualValues(i, 1)) tempScore = player1Score;
